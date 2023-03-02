@@ -12,11 +12,11 @@ public class Client implements Runnable {
     private boolean done;
 
     @Override
-    public static void run() {
+    public void run() {
         try {
             Socket client = new Socket("127.0.0.1", 9999);
             out = new PrintWriter(client.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader((client.getInputStream())));
+            in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
             InputHandler inputHandler = new InputHandler();
             Thread t = new Thread(inputHandler);
@@ -66,9 +66,10 @@ public class Client implements Runnable {
 
     }
 
+
     public static void main(String[] args) {
         Client client = new Client();
-        Client.run();
+        client.run();
     }
-
 }
+
